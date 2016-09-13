@@ -3,7 +3,7 @@ import java.text.SimpleDateFormat;
 import java.text.ParseException;
 
 public class Job{
-  private String mPosition;
+  public String mPosition;
   private String mCompany;
   private String mLocation;
   private String mDescription;
@@ -17,9 +17,9 @@ public class Job{
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
     try{ mStartingDate = formatter.parse(startingDateInput);}
-    catch (ParseException e){/*e.printStackTrace();*/}
+    catch (ParseException e){}
     try{ mEndingDate = formatter.parse(endingDateInput);}
-    catch (ParseException e){/*e.printStackTrace();*/}
+    catch (ParseException e){}
   }
   public Date getStartingDate(){
     return mStartingDate;
