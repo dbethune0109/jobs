@@ -1,16 +1,20 @@
 <h1>Resume</h1>
+<h3>$name</h3>
+
 #if ($jobs)
-    <ul>
+    <ol>
     #foreach ($job in $jobs)
+    <ul>
       <li>Position: $job.getPosition()</li>
       <li>Company: $job.getCompany()</li>
       <li>Location: $job.getLocation()</li>
       <li>Description: $job.getDescription()</li>
       <li>Starting Date: $formatter.format($job.getStartingDate())</li>
       <li>End Date: $formatter.format($job.getEndingDate())</li>
-    #end
     </ul>
+    #end
+    </ol>
 #else
   <p>No jobs</p>
 #end
-<a href="/">Go Back</a>
+<a href="/addjob">Go Back</a>

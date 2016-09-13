@@ -14,17 +14,24 @@ public class App {
   public static void main(String[] args) {
 
     String layout = "templates/layout.vtl";
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 
     staticFileLocation("/public");
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("jobs", request.session().attribute("jobs"));
+      model.put("template", "templates/name.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/addjob", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      request.session().attribute("name", name);
       model.put("template", "templates/form.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/form", (request, response) -> {
+    post("/seejobs", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       ArrayList<Job> jobs = request.session().attribute("jobs");
       if (jobs == null) {
@@ -41,6 +48,7 @@ public class App {
       Job myJob = new Job(position, company, location, description, startingDate, endingDate);
       jobs.add(myJob);
       model.put("jobs", request.session().attribute("jobs"));
+      model.put("name", request.session().attribute("name"));
       model.put("formatter", formatter);
       model.put("template","templates/resume.vtl");
       return new ModelAndView(model, layout);

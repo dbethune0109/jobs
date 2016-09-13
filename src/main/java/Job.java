@@ -16,10 +16,18 @@ public class Job{
     mDescription = descriptionInput;
 
     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    try{ mStartingDate = formatter.parse(startingDateInput);}
-    catch (ParseException e){}
-    try{ mEndingDate = formatter.parse(endingDateInput);}
-    catch (ParseException e){}
+    try{
+      mStartingDate = formatter.parse(startingDateInput);
+    }
+    catch (ParseException e){
+      e.printStackTrace();
+    }
+    try{
+      mEndingDate = formatter.parse(endingDateInput);
+    }
+    catch (ParseException e){
+      e.printStackTrace();
+    }
   }
   public Date getStartingDate(){
     return mStartingDate;
